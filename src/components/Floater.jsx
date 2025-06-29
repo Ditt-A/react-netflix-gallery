@@ -1,4 +1,4 @@
-// src/components/Floater.jsx (VERSI DENGAN PROGRESS BAR)
+// src/components/Floater.jsx (VERSI FINAL DENGAN STRUKTUR BENAR)
 import React from 'react';
 
 function Floater({ hoveredData, onImageClick, onInteraction }) {
@@ -7,7 +7,6 @@ function Floater({ hoveredData, onImageClick, onInteraction }) {
   }
 
   const { item, rect } = hoveredData;
-  // Kita cek apakah item ini punya properti 'progress'
   const isContinueWatching = !!item.progress;
 
   const style = {
@@ -23,8 +22,7 @@ function Floater({ hoveredData, onImageClick, onInteraction }) {
     <div className="floater-container is-visible" style={style} {...onInteraction}>
       <div className="item-floater">
 
-        {/* --- BAGIAN YANG DIUBAH --- */}
-        {/* Kita buatkan wadah khusus untuk gambar dan progress bar */}
+        {/* INI WADAH BARU YANG PENTING */}
         <div className="floater-img-wrapper">
           <img 
             src={item.imageUrl} 
@@ -32,28 +30,22 @@ function Floater({ hoveredData, onImageClick, onInteraction }) {
             className="item-img" 
             onClick={() => onImageClick(item.imageUrl)}
           />
-          {/* Progress bar hanya akan dirender jika ini item 'Continue Watching' */}
+          {/* Progress bar sekarang ada di dalam wadah ini, bersama gambar */}
           {isContinueWatching && (
             <div className="progress-bar">
               <div className="progress" style={{ width: item.progress }}></div>
             </div>
           )}
         </div>
-        {/* --- AKHIR BAGIAN YANG DIUBAH --- */}
         
+        {/* Panel detail tetap berada di luar wadah gambar */}
         <div className="item-details">
-          <div className="item-buttons">
-            <div className="buttons-left"><span className="btn-icon"><i className="fas fa-play"></i></span><span className="btn-icon"><i className="fas fa-plus"></i></span><span className="btn-icon"><i className="fas fa-times"></i></span><span className="btn-icon"><i className="far fa-thumbs-up"></i></span></div>
-            <div className="buttons-right"><span className="btn-icon"><i className="fas fa-chevron-down"></i></span></div>
-          </div>
-          <div className="item-info">
-            <p className="photo-title">{item.title}</p>
-            <span className="photo-meta">{item.meta}</span>
-          </div>
+            <div className="item-buttons"><div className="buttons-left"><span className="btn-icon"><i className="fas fa-play"></i></span><span className="btn-icon"><i className="fas fa-plus"></i></span><span className="btn-icon"><i className="fas fa-times"></i></span><span className="btn-icon"><i className="far fa-thumbs-up"></i></span></div><div className="buttons-right"><span className="btn-icon"><i className="fas fa-chevron-down"></i></span></div></div><div className="item-info"><p className="photo-title">{item.title}</p><span className="photo-meta">{item.meta}</span></div>
         </div>
 
       </div>
     </div>
   );
 }
+
 export default Floater;
