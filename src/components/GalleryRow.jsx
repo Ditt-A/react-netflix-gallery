@@ -2,7 +2,8 @@ import React, { useRef } from 'react';
 import GalleryItem from './GalleryItem';
 import Top10Item from './Top10Item';
 
-function GalleryRow({ title, items, type = 'standard', onImageClick, onItemHover, onRowInteraction, isActive }) {
+// Terima prop 'onArrowHover' yang baru
+function GalleryRow({ title, items, type = 'standard', onImageClick, onItemHover, onRowInteraction, isActive, onArrowHover }) {
   const galleryRowRef = useRef(null);
 
   const handleScroll = (direction) => {
@@ -15,19 +16,19 @@ function GalleryRow({ title, items, type = 'standard', onImageClick, onItemHover
   };
 
   const isTop10 = type === 'top10';
+  const rowEventHandlers = !isTop10 ? onRowInteraction : {};
 
   return (
     <section className="category-row">
       <h2>{title}</h2>
-      <div 
-        className={`gallery-wrapper ${isActive ? 'arrows-visible' : ''}`}
-        {...onRowInteraction}
-      >
+      <div className={`gallery-wrapper ${isActive ? 'arrows-visible' : ''}`} {...rowEventHandlers}>
+        
+        {/* Tombol panah sekarang memiliki onMouseEnter yang memanggil onArrowHover */}
         <button 
           className="scroll-arrow arrow-left" 
           aria-label="Scroll Left" 
           onClick={() => handleScroll('left')} 
-          onMouseEnter={onRowInteraction?.onMouseEnter} // Pastikan panah juga membatalkan timer
+          onMouseEnter={!isTop10 ? onArrowHover : null}
         >
           <i className="fas fa-chevron-left"></i>
         </button>
@@ -40,8 +41,7 @@ function GalleryRow({ title, items, type = 'standard', onImageClick, onItemHover
               <GalleryItem 
                 key={item.id} 
                 item={item} 
-                // Teruskan event hover ke atas, tambahkan 'title' baris ini
-                onItemHover={(itemData, element) => onItemHover(itemData, element, title)}
+                onItemHover={(itemData, element) => onItemHover(itemData, element, title)} 
               />
             )
           ))}
@@ -51,7 +51,7 @@ function GalleryRow({ title, items, type = 'standard', onImageClick, onItemHover
           className="scroll-arrow arrow-right" 
           aria-label="Scroll Right" 
           onClick={() => handleScroll('right')} 
-          onMouseEnter={onRowInteraction?.onMouseEnter} // Pastikan panah juga membatalkan timer
+          onMouseEnter={!isTop10 ? onArrowHover : null}
         >
           <i className="fas fa-chevron-right"></i>
         </button>
@@ -59,5 +59,4 @@ function GalleryRow({ title, items, type = 'standard', onImageClick, onItemHover
     </section>
   );
 }
-
 export default GalleryRow;

@@ -63,8 +63,11 @@ main {
     display: none;
 }
 
-/* --- 4. ITEM GALERI STANDAR (SEBAGAI PLACEHOLDER) --- */
-/* --- ITEM GALERI (PLACEHOLDER) --- */
+/* ================================================================== */
+/* === GANTI BAGIAN CSS INI UNTUK ANIMASI HOVER GAYA LAMA === */
+/* ================================================================== */
+
+/* --- 4. ITEM GALERI (PLACEHOLDER) --- */
 .gallery-item {
     flex: 0 0 auto;
     width: 280px;
@@ -72,10 +75,13 @@ main {
     margin-right: 10px;
     cursor: pointer;
     border-radius: 4px;
-    /* Tambahkan transisi agar saat hover berakhir, ia kembali dengan mulus */
-    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    /* Memberi transisi saat kembali ke ukuran normal */
+    transition: transform 0.3s ease;
 }
-
+.gallery-item:hover {
+    /* Sedikit efek pada placeholder untuk respons instan */
+    transform: scale(1.02);
+}
 .gallery-item .item-img {
     width: 100%;
     height: 100%;
@@ -84,38 +90,62 @@ main {
     display: block;
 }
 
-/* --- 5. FLOATER (KARTU POP-UP) --- */
-/* --- FLOATER (KARTU POP-UP) - LOGIKA BARU --- */
-/* --- FLOATER (KARTU POP-UP) --- */
+/* --- 5. FLOATER (KARTU POP-UP) DENGAN ANIMASI BARU --- */
 .floater-container {
+    position: fixed;
     z-index: 100;
+    pointer-events: none; /* Awalnya tidak bisa di-interaksi */
     
-    /* RESEP BARU UNTUK ANIMASI SUPER SMOOTH */
-    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), 
-                opacity 0.2s ease-in-out;
-    
+    /* State Awal: transparan dan sedikit mengecil */
     opacity: 0;
-    transform: scale(1);
-    pointer-events: none;
+    transform: scale(0.95);
+
+    /* INI KUNCI UTAMANYA: Transisi dengan DELAY */
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+                opacity 0.3s ease;
+    transition-delay: 0.2s; /* Jeda 0.2 detik sebelum animasi dimulai */
 }
 
 .floater-container.is-visible {
+    /* State Saat Aktif: terlihat, membesar, dan bisa di-interaksi */
     opacity: 1;
-    /* Kita gunakan scale yang sama seperti sebelumnya, tapi animasinya akan beda rasa */
     transform: scale(1.25);
     pointer-events: auto;
+    transition-delay: 0s; /* Hapus delay saat sudah aktif */
 }
+
 .item-floater {
     background-color: #181818;
     border-radius: 6px;
     box-shadow: 0px 8px 24px rgba(0,0,0,0.8);
     overflow: hidden;
 }
+
+/* Gambar di dalam floater, kita animasikan juga border-radiusnya */
 .item-floater .item-img {
     width: 100%;
     height: 157px;
     object-fit: cover;
     display: block;
+    border-radius: 4px; /* Awalnya sudut tetap bulat */
+    transition: border-radius 0.4s ease;
+    transition-delay: 0.2s;
+}
+.floater-container.is-visible .item-img {
+    border-radius: 6px 6px 0 0; /* Sudut bawah jadi tajam saat aktif */
+}
+
+/* Panel detail di dalam floater, kita buat animasinya sendiri */
+.item-floater .item-details {
+    padding: 16px;
+    opacity: 0; /* Awalnya transparan */
+    transform: translateY(10px); /* Awalnya sedikit di bawah */
+    transition: opacity 0.3s ease 0.1s, transform 0.3s ease 0.1s; /* Transisi dengan delay-nya sendiri */
+}
+.floater-container.is-visible .item-details {
+    opacity: 1; /* Muncul */
+    transform: translateY(0); /* Bergeser ke atas */
+    transition-delay: 0.3s; /* Muncul setelah kartu membesar */
 }
 
 /* --- 6. GAYA UNTUK ITEM TOP 10 --- */
@@ -130,9 +160,87 @@ main {
 .top10-poster img { width: 100%; height: 210px; object-fit: cover; border-radius: 5px; display: block; }
 .top10-item:hover .top10-number { opacity: 0; }
 
-/* --- 7. DETAIL, TOMBOL, MODAL, PANAH --- */
-.item-details{padding:12px}.item-buttons{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}.buttons-left,.buttons-right{display:flex;gap:8px}.btn-icon{display:flex;align-items:center;justify-content:center;width:32px;height:32px;border:2px solid hsla(0,0%,100%,.7);border-radius:50%;background-color:rgba(42,42,42,.6);color:#fff;font-size:.9rem;cursor:pointer;transition:border-color .3s,background-color .3s}.btn-icon:hover{border-color:#fff;background-color:hsla(0,0%,100%,.1)}.buttons-left .btn-icon:first-child{background-color:#fff;color:#000;border-color:#fff}.item-info{font-size:.8rem}.photo-title{font-weight:700;margin:0 0 5px;font-size:1rem}.photo-meta{color:#a0a0a0}.modal{display:none;position:fixed;z-index:1001;left:0;top:0;width:100%;height:100%;background-color:rgba(0,0,0,.9);align-items:center;justify-content:center}.modal-content{margin:auto;display:block;max-width:80%;max-height:80%}.close-button{position:absolute;top:25px;right:45px;color:#fff;font-size:40px;font-weight:700;cursor:pointer;transition:.3s}.close-button:hover{color:#bbb}.progress-bar{position:absolute;bottom:0;left:0;width:100%;height:4px;background-color:hsla(0,0%,42.7%,.7)}.progress{height:100%;background-color:#e50914;border-radius:2px}
-/* GANTI SEMUA ATURAN .scroll-arrow, .arrow-left, .arrow-right, .scroll-arrow:hover DENGAN INI */
+/* --- 7. DETAIL & TOMBOL DI DALAM FLOATER (VERSI RAPI) --- */
+/* ======================================================= */
+/* --- GANTI BAGIAN INI DI CSS ANDA --- */
+/* ======================================================= */
+
+/* --- 7. DETAIL & TOMBOL DI DALAM FLOATER (VERSI RAPI) --- */
+.item-details {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px; /* Jarak antara baris tombol dan baris info */
+}
+
+/* Ini adalah wadah utama untuk SEMUA tombol */
+.item-buttons {
+    display: flex; /* Membuat isinya (grup kiri & kanan) menjadi sejajar */
+    justify-content: space-between; /* Mendorong grup kiri dan kanan ke ujung */
+    align-items: center;
+}
+
+/* Wadah untuk tombol-tombol di kiri */
+.buttons-left {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Jarak antar tombol di kiri */
+}
+
+/* Wadah untuk tombol di kanan (hanya 1 tombol) */
+.buttons-right {
+    display: flex;
+    align-items: center;
+}
+
+.btn-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border: 2px solid rgba(255, 255, 255, 0.7);
+    border-radius: 50%;
+    background-color: rgba(42, 42, 42, 0.6);
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-icon:hover {
+    border-color: white;
+    background-color: rgba(62, 62, 62, 0.6);
+}
+
+/* Tombol Play dibuat lebih menonjol */
+.buttons-left .btn-icon:first-child {
+    background-color: white;
+    color: black;
+    border-color: white;
+}
+.buttons-left .btn-icon:first-child:hover {
+     background-color: rgba(255, 255, 255, 0.85);
+}
+
+/* Wadah untuk info teks */
+.item-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px; /* Jarak antara judul dan sub-judul */
+}
+
+.photo-title {
+    font-size: 1rem;
+    font-weight: bold;
+    /* Reset margin bawaan <p> jika ada */
+    margin: 0;
+}
+
+.photo-meta {
+    font-size: 0.85rem;
+    color: #b3b3b3;
+}
 
 .scroll-arrow {
     position: absolute;
