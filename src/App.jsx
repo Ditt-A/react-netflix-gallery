@@ -7,25 +7,25 @@ import './App.css';
 
 // --- DATABASE FOTO SEMENTARA (SUDAH DIPERBARUI) ---
 const loveTheseData = [
-  { id: 'p1', imageUrl: 'images/Pretty/Foto1.jpg', title: 'Selfie 1', meta: 'Beauty' },
-  { id: 'p2', imageUrl: 'images/Pretty/Foto2.jpg', title: 'Selfie 2', meta: 'Casual' },
-  { id: 'p3', imageUrl: 'images/Pretty/Foto3.jpg', title: 'Selfie 3', meta: 'Outdoor' },
-  { id: 'p4', imageUrl: 'images/Pretty/Foto4.jpg', title: 'Selfie 4', meta: 'Indoor' },
-  { id: 'p5', imageUrl: 'images/Pretty/Foto5.jpg', title: 'Selfie 5', meta: 'Event' },
-  { id: 'p6', imageUrl: 'images/Pretty/Foto6.jpg', title: 'Selfie 6', meta: 'Holiday' },
-  { id: 'p7', imageUrl: 'images/Pretty/Foto7.jpg', title: 'Selfie 7', meta: 'Random' },
-  { id: 'p8', imageUrl: 'images/Pretty/Foto8.jpg', title: 'Selfie 8', meta: 'Vintage' },
+  { id: 'p1', imageUrl: 'images/Pretty/Foto1.jpg', title: 'Senyum Paling Manis', meta: 'Fav Series' },
+  { id: 'p2', imageUrl: 'images/Pretty/Foto2.jpg', title: 'Pose Andalan', meta: 'Cute as Always' },
+  { id: 'p3', imageUrl: 'images/Pretty/Foto3.jpg', title: 'WARNING:DANGER', meta: 'Too much beauty' },
+  { id: 'p4', imageUrl: 'images/Pretty/Foto4.jpg', title: 'huft betmut', meta: 'Cemberutnya aja cantik' },
+  { id: 'p5', imageUrl: 'images/Pretty/Foto5.jpg', title: 'Red Carpet', meta: 'Selalu jadi perhatian utama' },
+  { id: 'p6', imageUrl: 'images/Pretty/Foto6.jpg', title: 'My Private Light', meta: 'menyinari hariku yang kosong ini' },
+  { id: 'p7', imageUrl: 'images/Pretty/Foto7.jpg', title: 'Dialog Lewat Mata', meta: 'cukup liat matanya untuk tau segalanya' },
+  { id: 'p8', imageUrl: 'images/Pretty/Foto8.jpg', title: 'Cantik Tanpa Skenario', meta: 'Jadi Pemandangan Favorit tanpa perlu bukti' },
 ];
 
 const continueData = [
-    { id: 'c1', imageUrl: 'images/Cute/Foto1.jpg', title: 'Pose Lucu', meta: 'Progress: 67%', progress: '67%' },
-    { id: 'c2', imageUrl: 'images/Cute/Foto2.jpg', title: 'Main Laptop', meta: 'Progress: 31%', progress: '31%' },
-    { id: 'c3', imageUrl: 'images/Cute/Foto3.jpg', title: 'Lihat Jendela', meta: 'Progress: 80%', progress: '80%' },
-    { id: 'c4', imageUrl: 'images/Cute/Foto4.jpg', title: 'Selfie Indoor', meta: 'Progress: 15%', progress: '15%' },
-    { id: 'c5', imageUrl: 'images/Cute/Foto5.jpg', title: 'Gaya Keren', meta: 'Progress: 50%', progress: '50%' },
-    { id: 'c6', imageUrl: 'images/Cute/Foto6.jpg', title: 'Random Cute', meta: 'Progress: 90%', progress: '90%' },
-    { id: 'c7', imageUrl: 'images/Cute/Foto7.jpg', title: 'Candid', meta: 'Progress: 45%', progress: '45%' },
-    { id: 'c8', imageUrl: 'images/Cute/Foto8.jpg', title: 'Foto Artistik', meta: 'Progress: 22%', progress: '22%' },
+    { id: 'c1', imageUrl: 'images/Cute/Foto1.jpg', title: 'Spesies Langka: Human Kebab', meta: 'Hanya muncul saat cuaca dingin atau lagi mager. Sangat jinak and cute', progress: '67%' },
+    { id: 'c2', imageUrl: 'images/Cute/Foto2.jpg', title: 'Standar Cantikku', meta: 'My own standard for beauty', progress: '31%' },
+    { id: 'c3', imageUrl: 'images/Cute/Foto3.jpg', title: 'Definisi Kata "Gemes"', meta: 'Selalu pengen unyel2 pipinya', progress: '80%' },
+    { id: 'c4', imageUrl: 'images/Cute/Foto4.jpg', title: 'Sok Serius, Tapi Lucu', meta: 'fokus aja keliatan gemes banget', progress: '15%' },
+    { id: 'c5', imageUrl: 'images/Cute/Foto5.jpg', title: 'Serangan Udara Jarak Jauh', meta: 'Dari jauh udah, ditunggu secara langsungnya', progress: '50%' },
+    { id: 'c6', imageUrl: 'images/Cute/Foto6.jpg', title: 'Jurus Paling Ampuh: Cemberut', meta: 'Peringatan: Jurus ini bisa meluluhkan pertahanan apapun dan membuat permintaan apapun dikabulkan', progress: '90%' },
+    { id: 'c7', imageUrl: 'images/Cute/Foto7.jpg', title: 'Aset Paling Berharga: Pipi Bakpao', meta: 'Nominasi Pipi Paling Menggemaskan tahun ini. Pemenangnya sudah jelas, kan?', progress: '45%' },
+    { id: 'c8', imageUrl: 'images/Cute/Foto8.jpg', title: 'Nominasi Tergemes', meta: 'AAAAAAA INI GEMES BANGET GA BOONG', progress: '22%' },
 ];
 
 const top10Data = [
@@ -38,8 +38,6 @@ const top10Data = [
     { id: 't7', rank: 7, imageUrl: 'images/Potrait/Foto7.jpg', title: 'Top Photo 7' },
     { id: 't8', rank: 8, imageUrl: 'images/Potrait/Foto8.jpg', title: 'Top Photo 8' },
 ];
-
-
 function App() {
   const [modalData, setModalData] = useState({ isOpen: false, imageUrl: '' });
   const [hoveredData, setHoveredData] = useState({ item: null, rect: null });
@@ -73,9 +71,10 @@ function App() {
     }
   }, [cancelHide]);
 
+  // FUNGSI BARU: Dipanggil secara spesifik saat mouse menyentuh tombol panah
   const handleArrowHover = useCallback(() => {
-    cancelHide();
-    setHoveredData({ item: null, rect: null });
+    cancelHide(); // Batalkan semua timer untuk menyembunyikan
+    setHoveredData({ item: null, rect: null }); // Hapus data hover, sehingga floater hilang
   }, [cancelHide]);
 
   const onRowInteraction = { onMouseEnter: cancelHide, onMouseLeave: scheduleHide };
@@ -84,9 +83,9 @@ function App() {
     <>
       <Header />
       <main>
-        <GalleryRow title="We Think You'll Love These" items={loveTheseData} onImageClick={handleImageClick} onItemHover={handleItemHover} onRowInteraction={onRowInteraction} isActive={activeRow === "We Think You'll Love These"} onArrowHover={handleArrowHover} />
-        <GalleryRow title="Continue Your Gallery" items={continueData} onImageClick={handleImageClick} onItemHover={handleItemHover} onRowInteraction={onRowInteraction} isActive={activeRow === "Continue Your Gallery"} onArrowHover={handleArrowHover} />
-        <GalleryRow title="Top 10 Photos in Indonesia Today" items={top10Data} type="top10" onImageClick={handleImageClick} />
+        <GalleryRow title="Photos I found pretty" items={loveTheseData} onImageClick={handleImageClick} onItemHover={handleItemHover} onRowInteraction={onRowInteraction} isActive={activeRow === "Photos I found pretty"} onArrowHover={handleArrowHover} />
+        <GalleryRow title="Gallery of Cute" items={continueData} onImageClick={handleImageClick} onItemHover={handleItemHover} onRowInteraction={onRowInteraction} isActive={activeRow === "Gallery of Cute"} onArrowHover={handleArrowHover} />
+        <GalleryRow title="Potrait of the Day" items={top10Data} type="top10" onImageClick={handleImageClick} onItemHover={handleItemHover} onRowInteraction={onRowInteraction} isActive={activeRow === "Potrait of the Day"} onArrowHover={handleArrowHover}/>
       </main>
 
       <Floater hoveredData={hoveredData} onImageClick={handleImageClick} onInteraction={onRowInteraction} />
@@ -94,5 +93,4 @@ function App() {
     </>
   );
 }
-
 export default App;

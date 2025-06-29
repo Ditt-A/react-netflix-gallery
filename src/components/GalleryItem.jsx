@@ -12,7 +12,7 @@ function GalleryItem({ item, onItemHover }) {
 
   return (
     <div 
-      className="gallery-item" 
+      className="gallery-item" b
       ref={itemRef} 
       onMouseEnter={handleMouseEnter}
     >
