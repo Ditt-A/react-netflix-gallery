@@ -1,4 +1,4 @@
-// src/components/Floater.jsx (VERSI DENGAN STRUKTUR BENAR)
+// src/components/Floater.jsx (VERSI DENGAN PROGRESS BAR)
 import React from 'react';
 
 function Floater({ hoveredData, onImageClick, onInteraction }) {
@@ -7,6 +7,7 @@ function Floater({ hoveredData, onImageClick, onInteraction }) {
   }
 
   const { item, rect } = hoveredData;
+  // Kita cek apakah item ini punya properti 'progress'
   const isContinueWatching = !!item.progress;
 
   const style = {
@@ -21,37 +22,38 @@ function Floater({ hoveredData, onImageClick, onInteraction }) {
   return (
     <div className="floater-container is-visible" style={style} {...onInteraction}>
       <div className="item-floater">
-        <img src={item.imageUrl} alt={item.title} className="item-img" onClick={() => onImageClick(item.imageUrl)} />
+
+        {/* --- BAGIAN YANG DIUBAH --- */}
+        {/* Kita buatkan wadah khusus untuk gambar dan progress bar */}
+        <div className="floater-img-wrapper">
+          <img 
+            src={item.imageUrl} 
+            alt={item.title} 
+            className="item-img" 
+            onClick={() => onImageClick(item.imageUrl)}
+          />
+          {/* Progress bar hanya akan dirender jika ini item 'Continue Watching' */}
+          {isContinueWatching && (
+            <div className="progress-bar">
+              <div className="progress" style={{ width: item.progress }}></div>
+            </div>
+          )}
+        </div>
+        {/* --- AKHIR BAGIAN YANG DIUBAH --- */}
         
         <div className="item-details">
-          {/* WADAH UTAMA UNTUK SEMUA TOMBOL */}
           <div className="item-buttons">
-            {/* GRUP KIRI */}
-            <div className="buttons-left">
-              <span className="btn-icon"><i className="fas fa-play"></i></span>
-              <span className="btn-icon"><i className="fas fa-plus"></i></span>
-              <span className="btn-icon"><i className="fas fa-times"></i></span>
-              <span className="btn-icon"><i className="far fa-thumbs-up"></i></span>
-            </div>
-            {/* GRUP KANAN (SEKARANG DI DALAM .item-buttons) */}
-            <div className="buttons-right">
-              <span className="btn-icon"><i className="fas fa-chevron-down"></i></span>
-            </div>
+            <div className="buttons-left"><span className="btn-icon"><i className="fas fa-play"></i></span><span className="btn-icon"><i className="fas fa-plus"></i></span><span className="btn-icon"><i className="fas fa-times"></i></span><span className="btn-icon"><i className="far fa-thumbs-up"></i></span></div>
+            <div className="buttons-right"><span className="btn-icon"><i className="fas fa-chevron-down"></i></span></div>
           </div>
-
-          {/* WADAH UNTUK INFO TEKS */}
           <div className="item-info">
             <p className="photo-title">{item.title}</p>
             <span className="photo-meta">{item.meta}</span>
           </div>
         </div>
 
-        {isContinueWatching && (
-          <div className="progress-bar"><div className="progress" style={{ width: item.progress }}></div></div>
-        )}
       </div>
     </div>
   );
 }
-
 export default Floater;

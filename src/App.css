@@ -121,6 +121,10 @@ main {
     overflow: hidden;
 }
 
+.floater-img-wrapper {
+    position: relative; /* <-- Ini membuat progress bar menempel padanya */
+}
+
 /* Gambar di dalam floater, kita animasikan juga border-radiusnya */
 .item-floater .item-img {
     width: 100%;
