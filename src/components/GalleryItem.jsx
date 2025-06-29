@@ -1,25 +1,22 @@
 import React, { useRef } from 'react';
 
-function GalleryItem({ item, onImageClick, onItemEnter }) {
-  // useRef digunakan untuk mendapatkan referensi ke elemen div utama
+function GalleryItem({ item, onItemHover }) {
   const itemRef = useRef(null);
 
+  // Saat mouse masuk, kirim DATA ITEM dan juga REFERENSI ELEMEN-nya
+  const handleMouseEnter = () => {
+    if (onItemHover && itemRef.current) {
+      onItemHover(item, itemRef.current);
+    }
+  };
+
   return (
-    // Container utama untuk satu item, yang akan dideteksi oleh hover
     <div 
       className="gallery-item" 
       ref={itemRef} 
-      onMouseEnter={() => onItemEnter(item, itemRef.current)}
-      // Saat mouse masuk, panggil fungsi onItemEnter yang dikirim dari App.jsx
-      // Kita kirim data 'item' dan referensi elemennya 'itemRef.current'
+      onMouseEnter={handleMouseEnter}
     >
-      {/* Ini adalah gambar placeholder yang selalu terlihat */}
-      <img 
-        src={item.imageUrl} 
-        alt={item.title} 
-        className="item-img" 
-        // Kita pindahkan onClick ke Floater agar lebih konsisten
-      />
+      <img src={item.imageUrl} alt={item.title} className="item-img" />
     </div>
   );
 }
