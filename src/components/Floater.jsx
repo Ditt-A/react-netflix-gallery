@@ -1,16 +1,17 @@
+// src/components/Floater.jsx (VERSI DIPERBAIKI)
 import React from 'react';
 
-function Floater({ hoveredItem, onImageClick }) {
+// Terima properti onMouseEnter dari App.jsx
+function Floater({ hoveredItem, onImageClick, onMouseEnter }) {
   if (!hoveredItem) {
-    return null; // Jika tidak ada item yang di-hover, jangan tampilkan apa-apa
+    return null;
   }
 
   const { item, rect } = hoveredItem;
   const isContinueWatching = !!item.progress;
 
-  // Style untuk memposisikan floater tepat di atas placeholder
   const style = {
-    position: 'fixed', // Mengambang di atas segalanya
+    position: 'fixed',
     top: `${rect.top}px`,
     left: `${rect.left}px`,
     width: `${rect.width}px`,
@@ -18,7 +19,8 @@ function Floater({ hoveredItem, onImageClick }) {
   };
 
   return (
-    <div className="floater-container" style={style}>
+    // Tambahkan onMouseEnter di sini untuk membatalkan timer saat mouse menyentuh floater
+    <div className="floater-container" style={style} onMouseEnter={onMouseEnter}>
       <div className="item-floater">
         <img 
           src={item.imageUrl} 
